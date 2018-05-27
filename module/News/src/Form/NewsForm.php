@@ -11,6 +11,11 @@ use Zend\InputFilter\InputFilter;
 use Zend\Validator\NotEmpty;
 use Zend\Validator\StringLength;
 
+use Zend\Filter; 
+use Zend\Validator\File\UploadFile as FileUpload;
+use Zend\Validator\File\FilesSize;
+use Zend\Validator\File\MimeType;
+
 class NewsForm extends Form {
 	public $action;
 
@@ -39,7 +44,7 @@ class NewsForm extends Form {
 		]);
 
 		$this->add([
-			'name'=>'tieude',
+			'name'=>'TieuDe',
 			'type'=>'text',
 			'options'=>[
 				'label'=>'Tiêu đề',
@@ -55,7 +60,7 @@ class NewsForm extends Form {
 		]);
 
 		$this->add([
-			'name'=>'tomtat',
+			'name'=>'TomTat',
 			'type'=>'Textarea',
 			'options'=>[
 				'label'=>'Tóm tắt',
@@ -71,7 +76,7 @@ class NewsForm extends Form {
 		]);
 
 		$this->add([
-			'name'=>'urlhinh',
+			'name'=>'urlHinh',
 			'type'=>'File',
 			'options'=>[
 				'label'=>'Chọn hình',
@@ -87,7 +92,7 @@ class NewsForm extends Form {
 		]);
 
 		$this->add([
-			'name'=>'content',
+			'name'=>'Content',
 			'type'=>'Textarea',
 			'options'=>[
 				'label'=>'Nội dung',
@@ -103,7 +108,7 @@ class NewsForm extends Form {
 		]);
 
 		$this->add([
-			'name'=>'idloai',
+			'name'=>'idLoai',
 			'type'=>Select::class,
 			'options'=>[
 				'label'=>'Thể loại',
@@ -118,7 +123,7 @@ class NewsForm extends Form {
 		]);
 
 		$this->add([
-			'name'=>'noibat',
+			'name'=>'NoiBat',
 			'type'=>Checkbox::class,
 			'options'=>[
 				'label'=>'Nổi bật',
@@ -134,7 +139,7 @@ class NewsForm extends Form {
 		]);
 
 		$this->add([
-			'name'=>'anhien',
+			'name'=>'AnHien',
 			'type'=>Checkbox::class,
 			'options'=>[
 				'label'=>'Ẩn hiện',
@@ -165,8 +170,9 @@ class NewsForm extends Form {
 		$filter = new InputFilter();
 		$this->setInputFilter($filter);
 
+		//TIEUDE
 		$filter->add([
-			'name'		=>'tieude',
+			'name'		=>'TieuDe',
 			'required'	=>true,
 			'validators'=>[
 				[
@@ -184,7 +190,7 @@ class NewsForm extends Form {
 					'name'=>"StringLength",
 					'options'=>[
 						'min'=>5,
-						'max'=>30,
+						'max'=>80,
 						'messages'=>[
 							StringLength::TOO_SHORT=>"Tiêu đề tối thiểu %min% ký tự",
 							StringLength::TOO_LONG=>"Tiêu đề tối đa %max% ký tự"
@@ -196,8 +202,9 @@ class NewsForm extends Form {
 			]
 		]);
 
-	$filter->add([
-			'name'		=>'tomtat',
+		//TOMTAT
+		$filter->add([
+			'name'		=>'TomTat',
 			'required'	=>true,
 			'validators'=>[
 				[
@@ -215,10 +222,10 @@ class NewsForm extends Form {
 					'name'=>"StringLength",
 					'options'=>[
 						'min'=>5,
-						'max'=>50,
+						'max'=>150,
 						'messages'=>[
-							StringLength::TOO_SHORT=>"Tiêu đề tối thiểu %min% ký tự",
-							StringLength::TOO_LONG=>"Tiêu đề tối đa %max% ký tự"
+							StringLength::TOO_SHORT=>"Tóm tắt tối thiểu %min% ký tự",
+							StringLength::TOO_LONG=>"Tóm tắt tối đa %max% ký tự"
 						],
 						'break_chain_on_failure'=>true,
 					]
@@ -227,8 +234,9 @@ class NewsForm extends Form {
 			]
 		]);
 
-	$filter->add([
-			'name'		=>'content',
+		//CONTENT
+		$filter->add([
+			'name'		=>'Content',
 			'required'	=>true,
 			'validators'=>[
 				[
@@ -248,8 +256,8 @@ class NewsForm extends Form {
 						'min'=>5,
 						'max'=>1000,
 						'messages'=>[
-							StringLength::TOO_SHORT=>"Tiêu đề tối thiểu %min% ký tự",
-							StringLength::TOO_LONG=>"Tiêu đề tối đa %max% ký tự"
+							StringLength::TOO_SHORT=>"Nội dung tối thiểu %min% ký tự",
+							StringLength::TOO_LONG=>"Nội dung tối đa %max% ký tự"
 						],
 						'break_chain_on_failure'=>true,
 					]
@@ -257,6 +265,37 @@ class NewsForm extends Form {
 				]
 			]
 		]);
+
+		
+		// $fileUpload = new FileUpload();
+  //       $fileUpload->setMessages([
+  //           FileUpload::NO_FILE => 'Vui lòng chọn file'
+  //       ]);
+
+  //       $size = new FilesSize(['min'=>100, 'max'=>102400]);//100bytes->10kb
+  //       $size->setMessages([
+  //           FilesSize::TOO_BIG => 'File bạn chọn quá lớn (%size%), yêu cầu <= %max%',
+  //           FilesSize::TOO_SMALL=>'File bạn chọn quá bé  (%size%), yêu cầu >= %min%',
+  //           FilesSize::NOT_READABLE => "File bạn chọn không thể đọc"
+  //       ]);
+
+  //       $mimeType  = new \Zend\Validator\File\MimeType('image/gif, image/png, image/jpeg');
+  //       $mimeType->setMessages([
+  //            \Zend\Validator\File\MimeType::FALSE_TYPE => 'Mimetype (%type%) không được phép. Chỉ cho phép chọn file hình'
+  //       ]);
+
+  //       // File Input
+  //       $fileInput = new \Zend\InputFilter\FileInput('urlhinh');
+  //       $fileInput->setRequired(true);
+
+  //       $fileInput->getValidatorChain()
+  //                   ->attach($fileUpload,true,3)
+  //                   ->attach($size,true,2)
+  //                   ->attach($mimeType,true,1);
+        
+       
+  //       $filter->add($fileInput);
+        
 	}
 }
 

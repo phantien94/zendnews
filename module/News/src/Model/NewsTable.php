@@ -7,9 +7,9 @@ use Zend\Db\Sql\Sql;
 
 class NewsTable {
 
-	private $tableGateway;
+    private $tableGateway;
 
-	public function __construct(TableGatewayInterface $tableGateway)
+    public function __construct(TableGatewayInterface $tableGateway)
     {
         $this->tableGateway = $tableGateway;
     }
@@ -32,7 +32,7 @@ class NewsTable {
             ]
         );
         //$select->where('AnHien=1');
-        $select->order('n.idbv ASC');
+        $select->order('n.idbv DESC');
         $statement = $sql->prepareStatementForSqlObject($select);
         return $results = $statement->execute();
 
@@ -47,4 +47,33 @@ class NewsTable {
         $statement = $sql->prepareStatementForSqlObject($select);
         return $results = $statement->execute();
     }
+
+    public function saveNews(News $data,$idbv=0){
+        // print_r($data);
+        // die;
+        $news = [
+            'lang'=>$data->lang,
+            'TieuDe'=>$data->TieuDe,
+            'TomTat'=>$data->TomTat,
+            'Alias'=>$data->Alias,
+            'urlHinh'=>$data->urlHinh,
+            'Ngay'=>$data->Ngay,
+            'Content'=>$data->Content,
+            'idLoai'=>$data->idLoai,
+            'NoiBat'=>$data->NoiBat,
+            'AnHien'=>$data->AnHien,
+
+        ];
+        return $this->tableGateway->insert($news);
+
+        // if($idbv==0){
+        //     return $this->tableGateway->insert($news);
+        // }
+        // return $this->tabelGateway->update(
+        //     $news,
+        //     "idbv=$idbv"
+        // );
+    }
+
+
 }

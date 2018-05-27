@@ -3,14 +3,14 @@ $form = $this->form;
 $form->setAttributes([
 	'action'=>'#'
 ]);
-$tieude = $form->get('tieude');
+$tieude = $form->get('TieuDe');
 $lang 	= $form->get('lang');
-$tomtat	= $form->get('tomtat');
-$urlhinh= $form->get('urlhinh');
-$content= $form->get('content');
-$idloai = $form->get('idloai');
-$anhien = $form->get('anhien');
-$noibat = $form->get('noibat');
+$tomtat	= $form->get('TomTat');
+$urlhinh= $form->get('urlHinh');
+$content= $form->get('Content');
+$idloai = $form->get('idLoai');
+$anhien = $form->get('AnHien');
+$noibat = $form->get('NoiBat');
 $btn	= $form->get('btnSubmit');
 ?>
 
@@ -54,6 +54,7 @@ $btn	= $form->get('btnSubmit');
 				<div class="col-sm-10">
 					<?php
 						echo $this->formElement($urlhinh);
+						echo $this->formElementErrors($urlhinh);
 					?>	
 				</div>
 			</div>
