@@ -10,8 +10,8 @@ use Zend\View\Model\ViewModel;
 use News\Model\NewsTable;
 use News\Model\News;
 use News\Form\NewsForm;
-use Zend\File\Transfer\Adapter\Http;
 use Zend\Filter\File\Rename;
+
 
 class NewsController extends AbstractActionController
 {
@@ -31,6 +31,7 @@ class NewsController extends AbstractActionController
         return new ViewModel(['result'=>$result]);
         
     }
+
     function addAction(){
         $form = new NewsForm();
         $types = $this->table->getAllType();
@@ -40,7 +41,7 @@ class NewsController extends AbstractActionController
         }
         // print_r($type);
         // return false;
-        $form->get('idloai')->setValueOptions($arrType);
+        $form->get('idLoai')->setValueOptions($arrType);
         
         $request = $this->getRequest();
 
@@ -50,6 +51,7 @@ class NewsController extends AbstractActionController
 
         $data = $request->getPost()->toArray();
         $file = $request->getFiles()->toArray();
+
         $data = array_merge($data,$file);
 
         $form->setData($data);
@@ -58,17 +60,49 @@ class NewsController extends AbstractActionController
         if(!$form->isValid()){
             return new ViewModel(['form'=>$form]);  
         }
-        else{
-            echo "Success";
-            return false;
-        }
+        // else{
+        //     echo "Success";
+        //     return false;
+        // }
 
+        // Upload Ngày và Alias
         $data['Ngay'] = date ('Y-m-d',time());
         $data['Alias'] = changeTitle($data['TieuDe']);
+
+        //Lưu hình ảnh
+        $arrImage = [];
+        foreach($data['urlHinh'] as $image){
+            $newName = time().'-'.$data['Alias'];
+            $arrImage[] = $newName;
+            
+            //Đổi tên file hình
+            $rename = new Rename([
+                    'target'=>FILE_PATH.'baiviet/'.$newName,
+                    'overwrite'=>true
+                ]);
+            
+            $result = $rename->filter($image);
+            
+        }
+        
+        //Upload file hình
+        $jsonImage = json_encode($arrImage);
+        $data['urlHinh'] = $jsonImage;
+
+       
+        // echo "<pre>";
+        // print_r($data);
+        // echo "</pre>";
+        // return false;
 
         $news = new News();
         $news->exchangeArray($data);
         $this->table->saveNews($news);
+
+         return $this->redirect()->toRoute('news',[
+            'controller'=>'news',
+            'action'=>'index'
+        ]);
     }
     
 }
