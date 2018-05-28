@@ -7,9 +7,15 @@ use Zend\Db\Sql\Sql;
 
 class NewsTable {
 
+<<<<<<< HEAD
     private $tableGateway;
 
     public function __construct(TableGatewayInterface $tableGateway)
+=======
+	private $tableGateway;
+
+	public function __construct(TableGatewayInterface $tableGateway)
+>>>>>>> af9d8f8f41c870163dd2ebd2d19db89d4027516a
     {
         $this->tableGateway = $tableGateway;
     }
@@ -32,7 +38,11 @@ class NewsTable {
             ]
         );
         //$select->where('AnHien=1');
+<<<<<<< HEAD
         $select->order('n.idbv DESC');
+=======
+        $select->order('n.idbv ASC');
+>>>>>>> af9d8f8f41c870163dd2ebd2d19db89d4027516a
         $statement = $sql->prepareStatementForSqlObject($select);
         return $results = $statement->execute();
 
@@ -49,6 +59,7 @@ class NewsTable {
     }
 
     public function saveNews(News $data,$idbv=0){
+<<<<<<< HEAD
         // print_r($data);
         // die;
         $news = [
@@ -76,4 +87,12 @@ class NewsTable {
     }
 
 
+=======
+        $news = [
+
+            
+
+        ];
+    }
+>>>>>>> af9d8f8f41c870163dd2ebd2d19db89d4027516a
 }

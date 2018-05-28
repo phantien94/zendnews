@@ -1238,6 +1238,7 @@
         },
         {
             "name": "zendframework/zend-inputfilter",
+<<<<<<< HEAD
             "version": "2.8.2",
             "source": {
                 "type": "git",
@@ -1248,6 +1249,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/zendframework/zend-inputfilter/zipball/3f02179e014d9ef0faccda2ad6c65d38adc338d8",
                 "reference": "3f02179e014d9ef0faccda2ad6c65d38adc338d8",
+=======
+            "version": "2.8.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zend-inputfilter.git",
+                "reference": "55d1430db559e9781b147e73c2c0ce6635d8efe2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/zend-inputfilter/zipball/55d1430db559e9781b147e73c2c0ce6635d8efe2",
+                "reference": "55d1430db559e9781b147e73c2c0ce6635d8efe2",
+>>>>>>> af9d8f8f41c870163dd2ebd2d19db89d4027516a
                 "shasum": ""
             },
             "require": {
@@ -1287,7 +1300,11 @@
                 "inputfilter",
                 "zf"
             ],
+<<<<<<< HEAD
             "time": "2018-05-14T17:38:03+00:00"
+=======
+            "time": "2018-01-22T19:41:18+00:00"
+>>>>>>> af9d8f8f41c870163dd2ebd2d19db89d4027516a
         },
         {
             "name": "zendframework/zend-json",
@@ -1499,6 +1516,7 @@
         },
         {
             "name": "zendframework/zend-mime",
+<<<<<<< HEAD
             "version": "2.7.1",
             "source": {
                 "type": "git",
@@ -1509,6 +1527,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/zendframework/zend-mime/zipball/52ae5fa9f12845cae749271034a2d594f0e4c6f2",
                 "reference": "52ae5fa9f12845cae749271034a2d594f0e4c6f2",
+=======
+            "version": "2.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zend-mime.git",
+                "reference": "5db38e92f8a6c7c5e25c8afce6e2d0bd49340c5f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/zend-mime/zipball/5db38e92f8a6c7c5e25c8afce6e2d0bd49340c5f",
+                "reference": "5db38e92f8a6c7c5e25c8afce6e2d0bd49340c5f",
+>>>>>>> af9d8f8f41c870163dd2ebd2d19db89d4027516a
                 "shasum": ""
             },
             "require": {
@@ -1546,7 +1576,11 @@
                 "mime",
                 "zf"
             ],
+<<<<<<< HEAD
             "time": "2018-05-14T19:02:50+00:00"
+=======
+            "time": "2017-11-28T15:02:22+00:00"
+>>>>>>> af9d8f8f41c870163dd2ebd2d19db89d4027516a
         },
         {
             "name": "zendframework/zend-modulemanager",

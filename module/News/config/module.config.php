@@ -17,6 +17,7 @@ return [
             'news' => [
                 'type'    => Segment::class,
                 'options' => [
+<<<<<<< HEAD
                     'route'    => '[/:controller][/:action][/:page]',
                     'defaults' => [
                         // 'controller'=>Controller\NewsController::class,
@@ -25,6 +26,15 @@ return [
                     'constraints'=>[
                         'page'=>'[0-9]+'
                     ]
+=======
+                    'route'    => '[/:controller][/:action]',
+                    'defaults' => [
+                        
+                    ],
+                    // 'constraints'=>[
+                    //     'page'=>'[0-9]+'
+                    // ],
+>>>>>>> af9d8f8f41c870163dd2ebd2d19db89d4027516a
                     
                 ],
             ],
