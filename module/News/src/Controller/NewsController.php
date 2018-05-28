@@ -88,17 +88,12 @@ class NewsController extends AbstractActionController
         //Upload file hình
         $jsonImage = json_encode($arrImage);
         $data['urlHinh'] = $jsonImage;
-
-<<<<<<< HEAD
        
         // echo "<pre>";
         // print_r($data);
         // echo "</pre>";
         // return false;
 
-=======
-        echo "22222";
->>>>>>> af9d8f8f41c870163dd2ebd2d19db89d4027516a
         $news = new News();
         $news->exchangeArray($data);
         $this->table->saveNews($news);
