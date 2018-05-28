@@ -89,12 +89,7 @@ class NewsController extends AbstractActionController
         $jsonImage = json_encode($arrImage);
         $data['urlHinh'] = $jsonImage;
 
-       
-        // echo "<pre>";
-        // print_r($data);
-        // echo "</pre>";
-        // return false;
-
+        echo "22222";
         $news = new News();
         $news->exchangeArray($data);
         $this->table->saveNews($news);
