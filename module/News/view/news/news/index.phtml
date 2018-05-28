@@ -23,7 +23,14 @@
 				<td><?=$p->TieuDe ?></td>
 				<td><?=$p->Ngay ?></td>
 				<td><?=$p->loai ?></td>
-				<td><?=$p->urlHinh ?></td>
+				<td width="30%">
+                <?php
+                    $images = json_decode($p->urlHinh);
+                    foreach($images as $img):?>
+                    <img src='http://localhost/zendnews/public/img/images/<?=$img?>' height="80px">
+                <?php endforeach ?>
+
+                </td>
 			</tr>
 			
 			<?php

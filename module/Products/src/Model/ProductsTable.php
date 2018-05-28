@@ -21,7 +21,7 @@ class ProductsTable {
         return $this->tabelGateway->select('deleted = 0');
     }
 
-     function fetchAll(){
+    function fetchAll(){
         $adapter = $this->tabelGateway->getAdapter();
 
         $sql = new Sql($adapter);
@@ -50,8 +50,9 @@ class ProductsTable {
         return $results = $statement->execute();
     }
 
-     function saveUrl($alias){
+    function saveUrl($alias){
         $adapter = $this->tabelGateway->getAdapter();
+
         $sql = new Sql($adapter);
         $insert = $sql->insert('page_url');
         $insert->values(
@@ -64,6 +65,7 @@ class ProductsTable {
 
     function updateUrl($alias, $id){
         $adapter = $this->tabelGateway->getAdapter();
+
         $sql = new Sql($adapter);
         $update = $sql->update('page_url');
         $update->set(
@@ -73,8 +75,9 @@ class ProductsTable {
         $statement->execute();
     }
 
-    function saveProduct(Products $data,$id=0){
-        //print_r($data);die;
+    function saveProduct(Products $data, $id=0){
+        // print_r($data);
+        // echo $id;die;
         $product = [
             'id_type' => $data->id_type,
             'id_url'=>$data->id_url,
@@ -103,13 +106,13 @@ class ProductsTable {
     function findProduct($id){
         $product = $this->tabelGateway->select(['id'=>$id]);
         $product = $product->current();
-        if (!$product) return false;
+        if(!$product) return false;
         return $product;
     }
 
     function deleteProduct($id){
         //$this->tabelGateway->delete(['id'=>$id]);
-          $product = [
+        $product = [
             'deleted'=>1
         ];
         return $this->tabelGateway->update(
@@ -117,6 +120,12 @@ class ProductsTable {
             "id=$id"
         );
     }
+
+    
+
+
+
+    
 }
 
 

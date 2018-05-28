@@ -1,8 +1,11 @@
 <?php
+
 namespace Products;
+
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
+
 return [
     'router' => [
         'routes' => [
@@ -11,7 +14,7 @@ return [
                 'options' => [
                     'route'    => '[/:controller][/:action][/:page]',
                     'defaults' => [
-                        
+                        'page'=>1
                     ],
                     'constraints'=>[
                         'page'=>'[0-9]+'

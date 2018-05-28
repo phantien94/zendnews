@@ -51,7 +51,6 @@ class NewsController extends AbstractActionController
 
         $data = $request->getPost()->toArray();
         $file = $request->getFiles()->toArray();
-
         $data = array_merge($data,$file);
 
         $form->setData($data);
@@ -60,13 +59,9 @@ class NewsController extends AbstractActionController
         if(!$form->isValid()){
             return new ViewModel(['form'=>$form]);  
         }
-        // else{
-        //     echo "Success";
-        //     return false;
-        // }
 
-        // Upload Ngày và Alias
-        $data['Ngay'] = date ('Y-m-d',time());
+        // Alias
+       
         $data['Alias'] = changeTitle($data['TieuDe']);
 
         //Lưu hình ảnh
@@ -77,11 +72,11 @@ class NewsController extends AbstractActionController
             
             //Đổi tên file hình
             $rename = new Rename([
-                    'target'=>FILE_PATH.'images/'.$newName,
-                    'overwrite'=>true
-                ]);
+                'target'=>FILE_PATH.'images/'.$newName,
+                'overwrite'=>true
+            ]);
             
-            $result = $rename->filter($image);
+            $rename->filter($image);
             
         }
         
@@ -89,13 +84,13 @@ class NewsController extends AbstractActionController
         $jsonImage = json_encode($arrImage);
         $data['urlHinh'] = $jsonImage;
 
-       
+        $data['Ngay'] = date ('Y-m-d',time());
         // echo "<pre>";
         // print_r($data);
         // echo "</pre>";
         // return false;
 
-        $news = new News();
+        $news = new News;
         $news->exchangeArray($data);
         $this->table->saveNews($news);
 

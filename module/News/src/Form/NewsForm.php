@@ -86,7 +86,6 @@ class NewsForm extends Form {
 			],
 
 			'attributes'=>[
-				'class'=>'form-control',
 				'multiple'=>true
 			],
 		]);

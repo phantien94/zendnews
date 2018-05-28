@@ -8,14 +8,15 @@ use Zend\Filter;
 use Zend\Validator\NotEmpty;
 use Zend\Form\Element\Select;
 use Zend\Form\Element\Textarea;
-use Zend\Validator\Digits;
+use  Zend\Validator\Digits;
 use Zend\Form\Element\Checkbox;
 
 
 class ProductForm extends Form{
+
     public $action;
-    
-    function __construct(){
+    function __construct($action='add'){
+        $this->action = $action;
         parent::__construct();
 
         //type
@@ -210,6 +211,7 @@ class ProductForm extends Form{
         ]);
 
         //btn
+
         if($this->action =='add'){
             $this->add([
                 'type'=>'Submit',
@@ -297,8 +299,7 @@ class ProductForm extends Form{
                 ]
             ]
         ]);
-
-        //pomotion_price
+        //promotion_price
         $filter->add([
             'name'=>'promotion_price',
             'required'=>true,
@@ -310,7 +311,7 @@ class ProductForm extends Form{
                     'name'=>"NotEmpty",
                     'options'=>[
                         'messages'=>[
-                            NotEmpty::IS_EMPTY=>"Vui lòng nhập giá khuyến mãi"
+                            NotEmpty::IS_EMPTY=>"Vui lòng nhập đơn giá khuyến mãi "
                         ],
                          'break_chain_on_failure'=>true,
                     ] 
@@ -320,7 +321,7 @@ class ProductForm extends Form{
                     'options'=>[
                         'messages'=>[
                             Digits::NOT_DIGITS=>'Vui lòng chỉ nhập số từ 0-9',
-                            Digits::STRING_EMPTY=>'Vui lòng nhập đơn giá',
+                            Digits::STRING_EMPTY=>'Vui lòng nhập đơn giá khuyến mãi',
                             Digits::INVALID=>'Dữ liệu bạn nhập ko hợp lệ'
                         ],
                         'break_chain_on_failure'=>true
@@ -335,4 +336,4 @@ class ProductForm extends Form{
 }
 
 
-?>  
+?>

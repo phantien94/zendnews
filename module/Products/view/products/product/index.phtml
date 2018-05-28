@@ -11,18 +11,19 @@
 <style>
 .my-message ul li{
     list-style-type:none;
+
 }
 </style>
 <body>
 
-    <div>
-        <div class="col-sm-4 my-message">
+    <div class="row">
+        <div class="col-sm-4 col-sm-offset-4 my-message">
             <?= $this->flashMessenger()->render('success',['alert','alert-success']);?>
             <?= $this->flashMessenger()->render('warning',['alert','alert-warning']);?>
         </div>
     </div>
     <h2>
-        <div style="float:left;width:80%">List of products</div>
+        <div style="float:l,eft;width:80%">List of products</div>
         <div style="float:right;width:20%;text-align:right">
         <a href="<?=$this->url('products',[
             'controller'=>'product',
@@ -62,7 +63,7 @@
                 <?php endforeach ?>
                 </td>
                 <td>
-                     <a  href="<?=$this->url('products',[
+                <a  href="<?=$this->url('products',[
                     'controller'=>'product',
                     'action'=>'edit',
                     'page'=>$p->id

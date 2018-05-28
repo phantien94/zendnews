@@ -17,7 +17,6 @@
     <?php foreach ($this->pagesInRange as $page): ?>
     <?php if ($page != $this->current): ?>
         <a href="<?= $this->url($this->route, [
-                                    'controller' => 'product',
                                     'action'=>'index',
                                     'page' => $page
                                 ]); ?>">

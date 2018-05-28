@@ -1,7 +1,8 @@
 ﻿<?php
 $form = $this->form;
 $form->setAttributes([
-	'action'=>'#'
+	'action'=>'#',
+	'enctype' => 'multipart/form-data'
 ]);
 $tieude = $form->get('TieuDe');
 $lang 	= $form->get('lang');
@@ -12,6 +13,8 @@ $idloai = $form->get('idLoai');
 $anhien = $form->get('AnHien');
 $noibat = $form->get('NoiBat');
 $btn	= $form->get('btnSubmit');
+
+$form->prepare();
 ?>
 
 <div class="row">
