@@ -77,7 +77,7 @@ class NewsController extends AbstractActionController
             
             //Đổi tên file hình
             $rename = new Rename([
-                    'target'=>FILE_PATH.'baiviet/'.$newName,
+                    'target'=>FILE_PATH.'images/'.$newName,
                     'overwrite'=>true
                 ]);
             
@@ -88,6 +88,7 @@ class NewsController extends AbstractActionController
         //Upload file hình
         $jsonImage = json_encode($arrImage);
         $data['urlHinh'] = $jsonImage;
+
        
         // echo "<pre>";
         // print_r($data);

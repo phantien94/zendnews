@@ -44,11 +44,7 @@ class NewsForm extends Form {
 		]);
 
 		$this->add([
-<<<<<<< HEAD
 			'name'=>'TieuDe',
-=======
-			'name'=>'tieude',
->>>>>>> af9d8f8f41c870163dd2ebd2d19db89d4027516a
 			'type'=>'text',
 			'options'=>[
 				'label'=>'Tiêu đề',
@@ -64,11 +60,7 @@ class NewsForm extends Form {
 		]);
 
 		$this->add([
-<<<<<<< HEAD
 			'name'=>'TomTat',
-=======
-			'name'=>'tomtat',
->>>>>>> af9d8f8f41c870163dd2ebd2d19db89d4027516a
 			'type'=>'Textarea',
 			'options'=>[
 				'label'=>'Tóm tắt',
@@ -84,13 +76,8 @@ class NewsForm extends Form {
 		]);
 
 		$this->add([
-<<<<<<< HEAD
 			'name'=>'urlHinh',
 			'type'=>'File',
-=======
-			'name'=>'urlhinh',
-			'type'=>'file',
->>>>>>> af9d8f8f41c870163dd2ebd2d19db89d4027516a
 			'options'=>[
 				'label'=>'Chọn hình',
 				'label_attributes'=>[
@@ -105,11 +92,7 @@ class NewsForm extends Form {
 		]);
 
 		$this->add([
-<<<<<<< HEAD
 			'name'=>'Content',
-=======
-			'name'=>'content',
->>>>>>> af9d8f8f41c870163dd2ebd2d19db89d4027516a
 			'type'=>'Textarea',
 			'options'=>[
 				'label'=>'Nội dung',
@@ -125,11 +108,7 @@ class NewsForm extends Form {
 		]);
 
 		$this->add([
-<<<<<<< HEAD
 			'name'=>'idLoai',
-=======
-			'name'=>'idloai',
->>>>>>> af9d8f8f41c870163dd2ebd2d19db89d4027516a
 			'type'=>Select::class,
 			'options'=>[
 				'label'=>'Thể loại',
@@ -144,11 +123,7 @@ class NewsForm extends Form {
 		]);
 
 		$this->add([
-<<<<<<< HEAD
 			'name'=>'NoiBat',
-=======
-			'name'=>'noibat',
->>>>>>> af9d8f8f41c870163dd2ebd2d19db89d4027516a
 			'type'=>Checkbox::class,
 			'options'=>[
 				'label'=>'Nổi bật',
@@ -164,11 +139,7 @@ class NewsForm extends Form {
 		]);
 
 		$this->add([
-<<<<<<< HEAD
 			'name'=>'AnHien',
-=======
-			'name'=>'anhien',
->>>>>>> af9d8f8f41c870163dd2ebd2d19db89d4027516a
 			'type'=>Checkbox::class,
 			'options'=>[
 				'label'=>'Ẩn hiện',
@@ -201,11 +172,7 @@ class NewsForm extends Form {
 
 		//TIEUDE
 		$filter->add([
-<<<<<<< HEAD
 			'name'		=>'TieuDe',
-=======
-			'name'		=>'tieude',
->>>>>>> af9d8f8f41c870163dd2ebd2d19db89d4027516a
 			'required'	=>true,
 			'validators'=>[
 				[
@@ -223,11 +190,7 @@ class NewsForm extends Form {
 					'name'=>"StringLength",
 					'options'=>[
 						'min'=>5,
-<<<<<<< HEAD
 						'max'=>80,
-=======
-						'max'=>30,
->>>>>>> af9d8f8f41c870163dd2ebd2d19db89d4027516a
 						'messages'=>[
 							StringLength::TOO_SHORT=>"Tiêu đề tối thiểu %min% ký tự",
 							StringLength::TOO_LONG=>"Tiêu đề tối đa %max% ký tự"
@@ -241,11 +204,7 @@ class NewsForm extends Form {
 
 		//TOMTAT
 		$filter->add([
-<<<<<<< HEAD
 			'name'		=>'TomTat',
-=======
-			'name'		=>'tomtat',
->>>>>>> af9d8f8f41c870163dd2ebd2d19db89d4027516a
 			'required'	=>true,
 			'validators'=>[
 				[
@@ -263,17 +222,10 @@ class NewsForm extends Form {
 					'name'=>"StringLength",
 					'options'=>[
 						'min'=>5,
-<<<<<<< HEAD
 						'max'=>150,
 						'messages'=>[
 							StringLength::TOO_SHORT=>"Tóm tắt tối thiểu %min% ký tự",
 							StringLength::TOO_LONG=>"Tóm tắt tối đa %max% ký tự"
-=======
-						'max'=>50,
-						'messages'=>[
-							StringLength::TOO_SHORT=>"Tiêu đề tối thiểu %min% ký tự",
-							StringLength::TOO_LONG=>"Tiêu đề tối đa %max% ký tự"
->>>>>>> af9d8f8f41c870163dd2ebd2d19db89d4027516a
 						],
 						'break_chain_on_failure'=>true,
 					]
@@ -284,11 +236,7 @@ class NewsForm extends Form {
 
 		//CONTENT
 		$filter->add([
-<<<<<<< HEAD
 			'name'		=>'Content',
-=======
-			'name'		=>'content',
->>>>>>> af9d8f8f41c870163dd2ebd2d19db89d4027516a
 			'required'	=>true,
 			'validators'=>[
 				[
@@ -308,13 +256,8 @@ class NewsForm extends Form {
 						'min'=>5,
 						'max'=>1000,
 						'messages'=>[
-<<<<<<< HEAD
 							StringLength::TOO_SHORT=>"Nội dung tối thiểu %min% ký tự",
 							StringLength::TOO_LONG=>"Nội dung tối đa %max% ký tự"
-=======
-							StringLength::TOO_SHORT=>"Tiêu đề tối thiểu %min% ký tự",
-							StringLength::TOO_LONG=>"Tiêu đề tối đa %max% ký tự"
->>>>>>> af9d8f8f41c870163dd2ebd2d19db89d4027516a
 						],
 						'break_chain_on_failure'=>true,
 					]

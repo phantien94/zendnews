@@ -36,11 +36,10 @@ if (file_exists(__DIR__ . '/../config/development.config.php')) {
     $appConfig = ArrayUtils::merge($appConfig, require __DIR__ . '/../config/development.config.php');
 }
 
-<<<<<<< HEAD
+
 define('FILE_PATH',__DIR__.'/img/');
 require 'helper/functions.php';
 
-=======
->>>>>>> af9d8f8f41c870163dd2ebd2d19db89d4027516a
+
 // Run the application!
 Application::init($appConfig)->run();
