@@ -1,0 +1,91 @@
+<?php if ($this->pageCount): ?>
+<div class="paginationControl">
+	<?php $this->firstItemNumber; ?> - <?php $this->lastItemNumber; ?>
+	of <?php $this->totalItemCount; ?>
+
+<ul class="pagination">
+
+    <li class="page-item">
+    	<!-- First page link -->
+			<?php if (isset($this->previous)): ?>
+			  <a class="page-link" href="<?= $this->url($this->route, [
+			                                'page' => $this->first,
+			                                'action'=>'index',
+			                                'controller'=>'news'
+			                            ]); ?>">
+			    First
+			  </a> |
+			<?php else: ?>
+			  <span class="disabled">First</span> |
+			<?php endif; ?>
+    </li>
+
+    <li class="page-item">
+    	<!-- Previous page link -->
+			<?php if (isset($this->previous)): ?>
+			  <a class="page-link" href="<?= $this->url($this->route, [
+			                                'page' => $this->previous,
+			                                'action'=>'index',
+			                                'controller'=>'news'
+			                            ]); ?>">
+			    &lt; Previous
+			  </a> |
+			<?php else: ?>
+			  <span class="disabled">&lt; Previous</span> |
+			<?php endif; ?>
+    </li>
+	
+	<!-- Numbered page links -->
+    <?php foreach ($this->pagesInRange as $page): ?>
+	    <?php if ($page != $this->current): ?>
+		    <li class="page-item">
+		      <a class="page-link" href="<?= $this->url($this->route, [
+		                                    'page' => $page,
+		                                    'action'=>'index',
+		                                    'controller'=>'news'
+		                                ]); ?>"> <?php $page; ?> </a>
+		    </li>
+	    <?php else: ?> 
+		    <li class="page-item active">
+		    	<a class="page-link" href="#">
+		    		<?php $page; ?>  		
+		    	</a>
+		    </li>
+	    <?php endif; ?>
+    <?endforeach; ?>
+
+    <li class="page-item">
+    	<!-- Next page link -->
+			<?php if (isset($this->next)): ?>
+			  <a class="page-link" href="<?= $this->url($this->route, [
+			                                'page' => $this->next,
+			                                'action'=>'index',
+			                                'controller'=>'news'
+			                            ]); ?>">
+			    Next &gt;
+			  </a> |
+			<?php else: ?>
+			  <span class="disabled">Next &gt;</span> |
+			<?php endif; ?>
+    </li>
+
+    <li class="page-item">
+    	<!-- Last page link -->
+			<?php if (isset($this->next)): ?>
+			  <a class="page-link" href="<?= $this->url($this->route, [
+			                                'page' => $this->last,
+			                                'action'=>'index',
+			                                'controller'=>'news'
+			                            ]); ?>">
+			    Last
+			  </a>
+			<?php else: ?>
+			  <span class="disabled">Last</span>
+			<?php endif; ?>
+    </li>
+
+  </ul>
+
+</div>
+
+<?php endif; ?>

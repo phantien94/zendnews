@@ -11,13 +11,13 @@ use News\Model\NewsTable;
 use News\Model\News;
 use News\Form\NewsForm;
 use Zend\Filter\File\Rename;
-
+use Zend\Paginator\Paginator;
+use Zend\Paginator\Adapter;
 
 class NewsController extends AbstractActionController
 {
     public $table;
     function __construct(NewsTable $table){
-         echo "abc";
         $this->table = $table;
     }
     
@@ -26,9 +26,20 @@ class NewsController extends AbstractActionController
     }
     function indexAction()
     {   
-        
+        $page = $this->params()->fromRoute('page');
         $result = $this->table->fetchAll();
-        return new ViewModel(['result'=>$result]);
+
+        $arrNews = [];
+        foreach($result as $n){
+            $arrNews[] = $n; 
+        }
+
+        $paginator = new Paginator(new Adapter\ArrayAdapter($arrNews));
+        $paginator->setCurrentPageNumber($page);
+        $paginator->setItemCountPerPage(5);
+        $paginator->setPageRange(5);
+
+        return new ViewModel(['result'=>$paginator]);
         
     }
 
@@ -98,6 +109,10 @@ class NewsController extends AbstractActionController
             'controller'=>'news',
             'action'=>'index'
         ]);
+    }
+
+    function editAction(){
+        
     }
     
 }
