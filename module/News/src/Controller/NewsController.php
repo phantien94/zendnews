@@ -112,7 +112,24 @@ class NewsController extends AbstractActionController
     }
 
     function editAction(){
-        
+        $id = (int)$this->params()->fromRoute('page');
+        $flag = true;
+
+        if($id===0) $flag=false;
+
+        $news = $this->table->findId($id);
+        if(!$news) $flag=false;
+
+        if(!flag){
+
+            return $this->redirect()->fromRoute('news',[
+                'controller'=>'news',
+                'action'    =>'index'
+            ]);
+        }
+
+        $form = new NewsForm('edit');
+        return false;
     }
     
 }

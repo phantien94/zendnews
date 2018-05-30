@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>List News</title>
-    <base href="http://localhost/zendnews/public/">
+    <base href="http://localhost:8080/zendnews/public/">
 </head>
 <body>
 	<table class="table table-hover">
@@ -15,6 +15,7 @@
 			<th>Ngày</th>
 			<th>Tên loại</th>
 			<th>urlHinh</th>
+			<th>Tùy chỉnh</th>
 		</thead>
 		<tbody>
 			<?php
@@ -27,12 +28,18 @@
 				<td><?=$p->Ngay ?></td>
 				<td><?=$p->loai ?></td>
 				<td width="30%">
+               
                 <?php
                     $images = json_decode($p->urlHinh);
                     foreach($images as $img):?>
-                    <img src='http://localhost/zendnews/public/img/images/<?=$img?>' height="80px">
+                    <img src='http://localhost:8080/zendnews/public/img/images/<?=$img?>' height="80px">
                 <?php endforeach ?>
 
+                </td>
+
+                <td>
+                	<a href="">Sửa</a> | 
+                	<a href="">Xóa</a>
                 </td>
 			</tr>
 			
@@ -43,7 +50,7 @@
 	</table>
 
 	<div class="row">
-		<?php 
+		<?=
 			$this->paginationControl(
     		$result,
     		'Sliding',

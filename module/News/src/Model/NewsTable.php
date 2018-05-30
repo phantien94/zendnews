@@ -64,15 +64,22 @@ class NewsTable {
             'AnHien'=>$data->AnHien,
 
         ];
-        return $this->tableGateway->insert($news);
+        //return $this->tableGateway->insert($news);
 
-        // if($idbv==0){
-        //     return $this->tableGateway->insert($news);
-        // }
+        if($idbv==0){
+            return $this->tableGateway->insert($news);
+        }
         // return $this->tabelGateway->update(
         //     $news,
         //     "idbv=$idbv"
         // );
+    }
+
+    public function findId($idbv){
+        $news = $this->tableGateway->select(['idbv'=>$idbv]);
+        $news = $news->current();
+        if(!$news){ return false; }
+        return $news;
     }
 
 
