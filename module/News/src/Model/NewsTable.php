@@ -69,10 +69,10 @@ class NewsTable {
         if($idbv==0){
             return $this->tableGateway->insert($news);
         }
-        // return $this->tabelGateway->update(
-        //     $news,
-        //     "idbv=$idbv"
-        // );
+        return $this->tabelGateway->update(
+            $news,
+            "idbv=$idbv"
+        );
     }
 
     public function findId($idbv){

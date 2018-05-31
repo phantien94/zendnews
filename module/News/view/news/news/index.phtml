@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>List News</title>
-    <base href="http://localhost:8080/zendnews/public/">
+    <base href="http://localhost/zendnews/public/">
 </head>
 <body>
 	<table class="table table-hover">
@@ -32,7 +32,7 @@
                 <?php
                     $images = json_decode($p->urlHinh);
                     foreach($images as $img):?>
-                    <img src='http://localhost:8080/zendnews/public/img/images/<?=$img?>' height="80px">
+                    <img src='img/images/<?=$img?>' height="80px">
                 <?php endforeach ?>
 
                 </td>

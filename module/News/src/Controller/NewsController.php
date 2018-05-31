@@ -118,18 +118,53 @@ class NewsController extends AbstractActionController
         if($id===0) $flag=false;
 
         $news = $this->table->findId($id);
+
         if(!$news) $flag=false;
 
-        if(!flag){
+        if(!$flag){
 
-            return $this->redirect()->fromRoute('news',[
+            return $this->redirect()->toRoute('news',[
                 'controller'=>'news',
                 'action'    =>'index'
             ]);
         }
+        print_r($news);
+        return false;
 
         $form = new NewsForm('edit');
-        return false;
+        
+        $types = $this->table->getAllType();
+        $arrType = [];
+        foreach($types as $type){
+            $arrType[$type['idloai']] = $type['TenLoai'];
+        }
+
+        $form->get('idLoai')->setValueOptions($arrType);
+
+        $form->bind($news);
+
+        $request->getRequest();
+
+        if(!$request->isPost()){
+            return ViewModel(['form'=>$form,'news'=>$news]);
+        }
+
+        $data = $request->getPost->toArray();
+        $file = $request->getFiles->toArray();
+
+        $data = array_merge($data,$file);
+
+        $data['Alias'] = changeTitle($data['TieuDe']);
+        $data['Ngay'] = date ('Y-m-d',time());
+
+        $news = new News;
+        $news->exchangeArray($data);
+        $this->table->saveNews($news);
+
+         return $this->redirect()->toRoute('news',[
+            'controller'=>'news',
+            'action'=>'index'
+        ]);
     }
     
 }
