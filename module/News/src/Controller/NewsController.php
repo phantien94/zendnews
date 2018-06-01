@@ -128,8 +128,8 @@ class NewsController extends AbstractActionController
                 'action'    =>'index'
             ]);
         }
-        print_r($news);
-        return false;
+        // print_r($news);
+        // return false;
 
         $form = new NewsForm('edit');
         
@@ -143,16 +143,41 @@ class NewsController extends AbstractActionController
 
         $form->bind($news);
 
-        $request->getRequest();
+        $request = $this->getRequest();
 
         if(!$request->isPost()){
-            return ViewModel(['form'=>$form,'news'=>$news]);
+            return new ViewModel(['form'=>$form,'news'=>$news]);
         }
 
         $data = $request->getPost->toArray();
         $file = $request->getFiles->toArray();
 
         $data = array_merge($data,$file);
+
+        if($data['urlHinh'][0]['error']>0){
+            $data['urlHinh'] = $news->urlHinh;
+        }
+        else{
+            $arrImage = [];
+            foreach($data['urlHinh'] as $image){
+            $newName = time().'-'.$data['Alias'];
+            $arrImage[] = $newName;
+            
+            //Đổi tên file hình
+            $rename = new Rename([
+                'target'=>FILE_PATH.'images/'.$newName,
+                'overwrite'=>true
+            ]);
+            
+            $rename->filter($image);
+            
+            }
+        
+        //Upload file hình
+        $jsonImage = json_encode($arrImage);
+        $data['urlHinh'] = $jsonImage;
+        
+        }
 
         $data['Alias'] = changeTitle($data['TieuDe']);
         $data['Ngay'] = date ('Y-m-d',time());

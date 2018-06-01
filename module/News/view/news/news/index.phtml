@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>List News</title>
-    <base href="http://localhost/zendnews/public/">
+    <base href="http://localhost:8080/zendnews/public/">
 </head>
 <body>
 	<table class="table table-hover">
@@ -38,7 +38,12 @@
                 </td>
 
                 <td>
-                	<a href="">Sửa</a> | 
+                	<a href="<?=$this->url('news',[
+                		'controller'=>'news',
+                		'action'	=>'edit',
+                		'page'=>$p->idbv
+                	])?>">Sửa</a> | 
+
                 	<a href="">Xóa</a>
                 </td>
 			</tr>

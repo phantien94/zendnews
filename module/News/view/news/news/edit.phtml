@@ -1,0 +1,121 @@
+<?php
+$form = $this->form;
+$form->setAttributes([
+	'action'=>'#',
+	'enctype' => 'multipart/form-data'
+]);
+$tieude = $form->get('TieuDe');
+$lang 	= $form->get('lang');
+$tomtat	= $form->get('TomTat');
+$urlhinh= $form->get('urlHinh');
+$content= $form->get('Content');
+$idloai = $form->get('idLoai');
+$anhien = $form->get('AnHien');
+$noibat = $form->get('NoiBat');
+$btn	= $form->get('btnSubmit');
+
+$form->prepare();
+?>
+
+<div class="row">
+	<div class="col-sm-12">
+		<h2>Thêm bài viết mới</h2>
+		<?=$this->form()->openTag($form)?>
+			
+			<div class="form-group">
+				<?=$this->formLabel($tieude)?>
+				<div class="col-sm-10">
+					<?php
+						echo $this->formElement($tieude);
+						echo $this->formElementErrors($tieude);
+					?>	
+				</div>
+			</div>
+
+			<div class="form-group">
+				<?=$this->formLabel($lang)?>
+				<div class="col-sm-10">
+					<?php
+						echo $this->formElement($lang);
+
+					?>	
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<?=$this->formLabel($tomtat)?>
+				<div class="col-sm-10">
+					<?php
+						echo $this->formElement($tomtat);
+						echo $this->formElementErrors($tomtat);
+					?>	
+				</div>
+			</div>
+
+			<div class="form-group">
+				<?=$this->formLabel($urlhinh)?>
+				<div class="col-sm-10">
+					<?php
+						echo $this->formElement($urlhinh);
+						echo $this->formElementErrors($urlhinh);
+					?>	
+				</div>
+			</div>
+
+			<div class="form-group">
+				<?=$this->formLabel($content)?>
+				<div class="col-sm-10">
+					<?php
+						echo $this->formElement($content);
+						echo $this->formElementErrors($content);
+					?>	
+				</div>
+			</div>
+
+			<div class="form-group">
+				<?=$this->formLabel($idloai)?>
+				<div class="col-sm-10">
+					<?php
+						echo $this->formElement($idloai);
+					?>	
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<div class="checkbox">
+						<label>
+							<?php
+								echo $this->formElement($anhien);
+							?>	
+							Ẩn hiện
+						</label>
+					</div>
+					
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<div class="checkbox">
+						<label>
+							<?php
+								echo $this->formElement($noibat);
+							?>	
+							Nổi bật
+						</label>
+					</div>
+					
+				</div>
+			</div>
+
+			<div class="form-group">
+            	<div class="col-sm-offset-2 col-sm-10">
+                	<?=$this->formElement($btn);?>
+            	</div>
+        	</div
+
+		<?=$this->form()->closeTag()?>
+	</div>
+</div>
+</div>
