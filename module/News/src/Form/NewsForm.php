@@ -138,30 +138,26 @@ class NewsForm extends Form {
             ]
 		]);
 
-		$this->add([
-			'name'=>'AnHien',
-			'type'=>Checkbox::class,
-			'options'=>[
-				'label'=>'Ẩn hiện',
-				'label_attributes'=>[
-                    'class'=>"col-sm-2"
-                ],
-			],
-
-			'attributes'=>[
-                'value'=> 1,
-                'required'=>false
-            ]
-		]);
-
-		$this->add([
+		if($this->action =='add'){
+			$this->add([
+	                'type'=>'Submit',
+	                'name'=>'btnSubmit',
+	                'attributes'=>[
+	                    'class'=>'btn btn-primary',
+	                    'value'=>'Add'
+	                ]
+	        ]);
+		}
+        else{
+            $this->add([
                 'type'=>'Submit',
                 'name'=>'btnSubmit',
                 'attributes'=>[
                     'class'=>'btn btn-primary',
-                    'value'=>'Add'
+                    'value'=>'Update'
                 ]
-        ]);
+            ]);
+        }
 
 		$this->filterForm();
 	}

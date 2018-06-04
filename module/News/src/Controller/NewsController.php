@@ -112,12 +112,12 @@ class NewsController extends AbstractActionController
     }
 
     function editAction(){
-        $id = (int)$this->params()->fromRoute('page');
+        $idbv = (int)$this->params()->fromRoute('page');
         $flag = true;
 
-        if($id===0) $flag=false;
+        if($idbv===0) $flag=false;
 
-        $news = $this->table->findId($id);
+        $news = $this->table->findId($idbv);
 
         if(!$news) $flag=false;
 
@@ -149,11 +149,13 @@ class NewsController extends AbstractActionController
             return new ViewModel(['form'=>$form,'news'=>$news]);
         }
 
-        $data = $request->getPost->toArray();
-        $file = $request->getFiles->toArray();
+        $data = $request->getPost()->toArray();
+        $file = $request->getFiles()->toArray();
 
         $data = array_merge($data,$file);
 
+        $data['Alias'] = changeTitle($data['TieuDe']);
+        
         if($data['urlHinh'][0]['error']>0){
             $data['urlHinh'] = $news->urlHinh;
         }
@@ -179,17 +181,61 @@ class NewsController extends AbstractActionController
         
         }
 
-        $data['Alias'] = changeTitle($data['TieuDe']);
+        
         $data['Ngay'] = date ('Y-m-d',time());
 
         $news = new News;
         $news->exchangeArray($data);
-        $this->table->saveNews($news);
+        $this->table->saveNews($news,$idbv);
 
          return $this->redirect()->toRoute('news',[
             'controller'=>'news',
             'action'=>'index'
         ]);
     }
+
+    function deleteAction(){
+        // $this->table->deleteNews($idbv);
+        // return false;
+        $idbv = (int)$this->params()->fromRoute('page');
+
+        $flag = true;
+
+        if($idbv===0) $flag=false;
+
+        $news = $this->table->findId($idbv);
+
+        if(!$news) $flag=false;
+
+        if(!$flag){
+
+            return $this->redirect()->toRoute('news',[
+                'controller'=>'news',
+                'action'    =>'index'
+            ]);
+
+        $request = $this->getRequest();
+
+        if(!$request->isPost()){
+            return new ViewModel(['idbv'=>$idbv,'news'=>$news]);
+        }
+
+
+        $btn = $request->getPost('del', 'No');
+        if($btn=='Yes'){
+            $this->table->deleteNews($idbv);
+        }
+        return $this->redirect()->toRoute('news',[
+            'controller'=>'news',
+            'action'=>'index'
+        ]);
     
+    }
+}
+
+    function testjsAction(){
+        $result = new ViewModel();
+        $result->setTemplate('news/testjs.phtml');
+        return $result;
+    }
 }

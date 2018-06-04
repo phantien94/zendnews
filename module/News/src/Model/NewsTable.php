@@ -31,7 +31,7 @@ class NewsTable {
                 'loai'=>'TenLoai'
             ]
         );
-        //$select->where('AnHien=1');
+        $select->where('n.AnHien = 1');
         $select->order('n.idbv DESC');
         $statement = $sql->prepareStatementForSqlObject($select);
         return $results = $statement->execute();
@@ -69,7 +69,7 @@ class NewsTable {
         if($idbv==0){
             return $this->tableGateway->insert($news);
         }
-        return $this->tabelGateway->update(
+        return $this->tableGateway->update(
             $news,
             "idbv=$idbv"
         );
@@ -80,6 +80,18 @@ class NewsTable {
         $news = $news->current();
         if(!$news){ return false; }
         return $news;
+    }
+
+    public function deleteNews($idbv){
+        $news = [
+            'AnHien'=>'0'
+        ];
+
+        return $this->tableGateway->update(
+            $news,
+            "idbv=$idbv"
+        );
+
     }
 
 

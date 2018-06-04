@@ -10,7 +10,6 @@ $tomtat	= $form->get('TomTat');
 $urlhinh= $form->get('urlHinh');
 $content= $form->get('Content');
 $idloai = $form->get('idLoai');
-$anhien = $form->get('AnHien');
 $noibat = $form->get('NoiBat');
 $btn	= $form->get('btnSubmit');
 
@@ -81,19 +80,7 @@ $form->prepare();
 				</div>
 			</div>
 
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<div class="checkbox">
-						<label>
-							<?php
-								echo $this->formElement($anhien);
-							?>	
-							Ẩn hiện
-						</label>
-					</div>
-					
-				</div>
-			</div>
+			
 
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">

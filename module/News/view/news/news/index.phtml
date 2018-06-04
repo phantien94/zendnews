@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>List News</title>
-    <base href="http://localhost:8080/zendnews/public/">
+    <base href="http://localhost/zendnews/public/">
+    
 </head>
 <body>
 	<table class="table table-hover">
@@ -22,7 +23,7 @@
 				foreach($this->result as $p):
 				$p = (object)$p;
 			?>
-			<tr>
+			<tr id="news">
 				<td><?=$p->idbv ?></td>
 				<td><?=$p->TieuDe ?></td>
 				<td><?=$p->Ngay ?></td>
@@ -44,7 +45,11 @@
                 		'page'=>$p->idbv
                 	])?>">Sửa</a> | 
 
-                	<a href="">Xóa</a>
+                	<a href="<?=$this->url('news',[
+                		'controller'=>'news',
+                		'action'	=>'delete',
+                		'page'=>$p->idbv
+                	])?>">Xóa</a>
                 </td>
 			</tr>
 			
@@ -63,5 +68,7 @@
     		['route' => 'news']
 		) ?>
 	</div>
+
+	
 </body>
 </html>
