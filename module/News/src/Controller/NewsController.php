@@ -197,6 +197,7 @@ class NewsController extends AbstractActionController
     function deleteAction(){
         // $this->table->deleteNews($idbv);
         // return false;
+
         $idbv = (int)$this->params()->fromRoute('page');
 
         $flag = true;
@@ -208,11 +209,11 @@ class NewsController extends AbstractActionController
         if(!$news) $flag=false;
 
         if(!$flag){
-
             return $this->redirect()->toRoute('news',[
                 'controller'=>'news',
                 'action'    =>'index'
             ]);
+        }
 
         $request = $this->getRequest();
 
@@ -220,17 +221,18 @@ class NewsController extends AbstractActionController
             return new ViewModel(['idbv'=>$idbv,'news'=>$news]);
         }
 
+        $this->table->deleteNews($idbv);
 
-        $btn = $request->getPost('del', 'No');
-        if($btn=='Yes'){
-            $this->table->deleteNews($idbv);
-        }
-        return $this->redirect()->toRoute('news',[
-            'controller'=>'news',
-            'action'=>'index'
-        ]);
+        // $btn = $request->getPost('del', 'No');
+        // if($btn=='Yes'){
+        //     $this->table->deleteNews($idbv);
+        // }
+        // return $this->redirect()->toRoute('news',[
+        //     'controller'=>'news',
+        //     'action'=>'index'
+        // ]);
     
-    }
+    
 }
 
     function testjsAction(){
