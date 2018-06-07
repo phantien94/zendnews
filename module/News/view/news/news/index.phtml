@@ -5,10 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>List News</title>
-    <base href="http://localhost:8080/zendnews/public/">
+    <base href="http://localhost/zendnews/public/">
     
 </head>
 <body>
+	<h2>Danh sách bài viết</h2>
+	<a href="<?=$this->url('news',[
+		'controller'=>'news',
+		'action'	=>'add'
+	])?>" class="btn btn-primary">Thêm bài viết mới</a>
+
 	<table class="table table-hover">
 		<thead>
 			<th>idbv</th>
