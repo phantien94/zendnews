@@ -221,16 +221,16 @@ class NewsController extends AbstractActionController
             return new ViewModel(['idbv'=>$idbv,'news'=>$news]);
         }
 
-        $this->table->deleteNews($idbv);
+        //$this->table->deleteNews($idbv);
 
-        // $btn = $request->getPost('del', 'No');
-        // if($btn=='Yes'){
-        //     $this->table->deleteNews($idbv);
-        // }
-        // return $this->redirect()->toRoute('news',[
-        //     'controller'=>'news',
-        //     'action'=>'index'
-        // ]);
+        $btn = $request->getPost('del', 'No');
+        if($btn=='Yes'){
+            $this->table->deleteNews($idbv);
+        }
+        return $this->redirect()->toRoute('news',[
+            'controller'=>'news',
+            'action'=>'index'
+        ]);
     
     
 }

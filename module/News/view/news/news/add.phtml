@@ -15,7 +15,7 @@ $btn	= $form->get('btnSubmit');
 
 $form->prepare();
 ?>
-
+<script src="../ckeditor/ckeditor.js"></script>
 <div class="row">
 	<div class="col-sm-12">
 		<h2>Thêm bài viết mới</h2>
@@ -57,7 +57,8 @@ $form->prepare();
 					<?php
 						echo $this->formElement($urlhinh);
 						echo $this->formElementErrors($urlhinh);
-					?>	
+					?>
+						
 				</div>
 			</div>
 
@@ -69,6 +70,9 @@ $form->prepare();
 						echo $this->formElementErrors($content);
 					?>	
 				</div>
+					<script>
+                		CKEDITOR.replace('content')
+                	</script>
 			</div>
 
 			<div class="form-group">
