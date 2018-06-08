@@ -19,6 +19,6 @@ return [
         'dsn'    => 'mysql:dbname=news;host=localhost;charset=utf8',
         'username' => 'root',
         'password' => ''
-    ],
+    ]
     
 ];

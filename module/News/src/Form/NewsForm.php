@@ -100,10 +100,8 @@ class NewsForm extends Form {
                     'class'=>"control-label col-sm-2"
                 ],
 			],
-
 			'attributes'=>[
 				'class'=>'form-control',
-				'rows'=>5,
 				'id'=>'content'
 			],
 		]);

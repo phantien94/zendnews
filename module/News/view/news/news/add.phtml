@@ -20,7 +20,8 @@ $form->prepare();
 <script src="../ckeditor/ckeditor.js"></script>
 <div class="row">
 	<div class="col-sm-12">
-		<h2>Thêm bài viết mới</h2>
+		<h2 class="text-center">Thêm bài viết mới</h2>
+		<br>
 		<?=$this->form()->openTag($form)?>
 			
 			<div class="form-group">
@@ -71,10 +72,11 @@ $form->prepare();
 						echo $this->formElement($content);
 						echo $this->formElementErrors($content);
 					?>	
-				</div>
+				
 					<script>
                 		CKEDITOR.replace('content')
                 	</script>
+                </div>
 			</div>
 
 			<div class="form-group">

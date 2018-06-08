@@ -94,5 +94,35 @@ class NewsTable {
 
     }
 
+    public function backupNews($idbv){
+        $news = [
+            'AnHien'=>'1'
+        ];
+
+        return $this->tableGateway->update(
+            $news,
+            "idbv=$idbv"
+        );
+    }
+
+    public function deletedList()
+    {
+        $adapter = $this->tableGateway->getAdapter();
+
+        $sql = new Sql($adapter);
+        $select = $sql->select(['n'=>'tintuc']);
+        $select->join(
+            ['p'=>'phanloaibai'],
+            'p.idloai = n.idLoai',
+            [
+                'loai'=>'TenLoai'
+            ]
+        );
+        $select->where('n.AnHien = 0');
+        $select->order('n.idbv DESC');
+        $statement = $sql->prepareStatementForSqlObject($select);
+        return $results = $statement->execute();
+
+    }
 
 }

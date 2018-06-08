@@ -21,18 +21,13 @@
 
 <body>
 
-	<h2 class="text-center">Danh sách tin tức</h2>
+	<h2 class="text-center">Tin tức đã xóa</h2>
 	<br>
 	<a href="<?=$this->url('news',[
 		'controller'=>'news',
-		'action'	=>'add'
-	])?>" class="btn btn-primary" id="add">Thêm tin mới</a>
+		'action'	=>'index'
+	])?>" class="btn btn-primary" id="add">Trang chủ</a>
 	
-	<a href="<?=$this->url('news',[
-		'controller'=>'news',
-		'action'	=>'deletedList'
-	])?>" class="btn btn-danger" id="add">Tin đã xóa</a>
-
 	<table class="table table-hover" id="table">
 		<thead>
 			<th>idbv</th>
@@ -65,15 +60,9 @@
                 <td>
                 	<a href="<?=$this->url('news',[
                 		'controller'=>'news',
-                		'action'	=>'edit',
+                		'action'	=>'backup',
                 		'page'=>$p->idbv
-                	])?>">Sửa</a> | 
-
-                	<a href="<?=$this->url('news',[
-                		'controller'=>'news',
-                		'action'	=>'delete',
-                		'page'=>$p->idbv
-                	])?>">Xóa</a>
+                	])?>">Khôi phục</a>
                 </td>
 			</tr>
 			
@@ -88,7 +77,7 @@
 			$this->paginationControl(
     		$result,
     		'Sliding',
-    		'paginator/pagination.phtml',
+    		'paginator/pagination_del.phtml',
     		['route' => 'news']
 		) ?>
 	</div>

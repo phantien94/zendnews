@@ -25,6 +25,7 @@ class NewsController extends AbstractActionController
     function testDBAction(){
         echo $this->table->testConnect();   
     }
+
     function indexAction()
     {   
         $page = $this->params()->fromRoute('page');
@@ -96,7 +97,7 @@ class NewsController extends AbstractActionController
         $jsonImage = json_encode($arrImage);
         $data['urlHinh'] = $jsonImage;
 
-        $data['Ngay'] = date ('Y-m-d',time());
+        $data['Ngay'] = date ('Y-m-d H:i:s',time());
         // echo "<pre>";
         // print_r($data);
         // echo "</pre>";
@@ -106,9 +107,11 @@ class NewsController extends AbstractActionController
         $news->exchangeArray($data);
         $this->table->saveNews($news);
 
-        $this->flashMessenger()->addSuccessMessage('Thêm thành công');
+        
+        //$this->addMessage($message, self::NAMESPACE_SUCCESS);
+        //$this->flashMessenger()->addSuccessMessage('Thêm thành công');
 
-         return $this->redirect()->toRoute('news',[
+        return $this->redirect()->toRoute('news',[
             'controller'=>'news',
             'action'=>'index'
         ]);
@@ -125,7 +128,7 @@ class NewsController extends AbstractActionController
         if(!$news) $flag=false;
 
         if(!$flag){
-            $this->flashMessenger()->addWarningMessage('Không tìm thấy bài viết');
+            //$this->flashMessenger()->addWarningMessage('Không tìm thấy bài viết');
             return $this->redirect()->toRoute('news',[
                 'controller'=>'news',
                 'action'    =>'index'
@@ -185,13 +188,13 @@ class NewsController extends AbstractActionController
         }
 
         
-        $data['Ngay'] = date ('Y-m-d',time());
+        $data['Ngay'] = date ('Y-m-d H:i:s',time());
 
         $news = new News;
         $news->exchangeArray($data);
         $this->table->saveNews($news,$idbv);
 
-        $this->flashMessenger()->addSuccessMessage('Cập nhật thành công');
+       // $this->flashMessenger()->addSuccessMessage('Cập nhật thành công');
 
          return $this->redirect()->toRoute('news',[
             'controller'=>'news',
@@ -214,7 +217,7 @@ class NewsController extends AbstractActionController
         if(!$news) $flag=false;
 
         if(!$flag){
-             $this->flashMessenger()->addWarningMessage('Không tìm thấy bài viết');
+             //$this->flashMessenger()->addWarningMessage('Không tìm thấy bài viết');
             return $this->redirect()->toRoute('news',[
                 'controller'=>'news',
                 'action'    =>'index'
@@ -234,7 +237,7 @@ class NewsController extends AbstractActionController
             $this->table->deleteNews($idbv);
         }
 
-        $this->flashMessenger()->addSuccessMessage('Bài viết đã được xóa');
+        //$this->flashMessenger()->addSuccessMessage('Bài viết đã được xóa');
 
         return $this->redirect()->toRoute('news',[
             'controller'=>'news',
@@ -243,6 +246,65 @@ class NewsController extends AbstractActionController
     
     
 }
+    function backupAction(){
+        // $this->table->deleteNews($idbv);
+        // return false;
+
+        $idbv = (int)$this->params()->fromRoute('page');
+
+        $flag = true;
+
+        if($idbv===0) $flag=false;
+
+        $news = $this->table->findId($idbv);
+
+        if(!$news) $flag=false;
+
+        if(!$flag){
+             //$this->flashMessenger()->addWarningMessage('Không tìm thấy bài viết');
+            return $this->redirect()->toRoute('news',[
+                'controller'=>'news',
+                'action'    =>'index'
+            ]);
+        }
+
+        $request = $this->getRequest();
+
+        if(!$request->isPost()){
+            return new ViewModel(['idbv'=>$idbv,'news'=>$news]);
+        }
+
+
+        $btn = $request->getPost('del', 'No');
+        if($btn=='Yes'){
+            $this->table->backupNews($idbv);
+        }
+
+        return $this->redirect()->toRoute('news',[
+            'controller'=>'news',
+            'action'=>'index'
+        ]);
+    
+    
+}
+    function deletedListAction()
+    {   
+        $page = $this->params()->fromRoute('page');
+        $result = $this->table->deletedList();
+
+        $arrNews = [];
+        foreach($result as $n){
+            $arrNews[] = $n; 
+        }
+
+        $paginator = new Paginator(new Adapter\ArrayAdapter($arrNews));
+        $paginator->setCurrentPageNumber($page);
+        $paginator->setItemCountPerPage(5);
+        $paginator->setPageRange(5);
+
+        return new ViewModel(['result'=>$paginator]);
+        
+    }
 
     function testjsAction(){
         $result = new ViewModel();

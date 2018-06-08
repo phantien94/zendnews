@@ -1,14 +1,13 @@
 <?php
 $form = $this->form;
 $form->setAttributes([
-	'enctype' => 'multipart/form-data',
 	'class'=>'form-horizontal',
 	'action'=>$this->url('news',[
 		'controller'=>'news',
 		'action'	=>'edit',
 		'page'		=>$news->idbv
 	]),
-	
+	'enctype'=>'multipart/form-data'
 ]);
 
 $tieude = $form->get('TieuDe');
@@ -22,10 +21,11 @@ $btn	= $form->get('btnSubmit');
 
 $form->prepare();
 ?>
-<script src="../ckeditor/ckeditor.js"></script>
+<script src="../../ckeditor/ckeditor.js"></script>
 <div class="row">
 	<div class="col-sm-12">
-		<h2>Thêm bài viết mới</h2>
+		<h2 class="text-center">Sửa bài viết <i>"<?=$news->TieuDe?>"</i></h2>
+		<br>
 		<?=$this->form()->openTag($form)?>
 			
 			<div class="form-group">
@@ -84,10 +84,12 @@ $form->prepare();
 						echo $this->formElement($content);
 						echo $this->formElementErrors($content);
 					?>	
-				</div>
+				
 					<script>
                 		CKEDITOR.replace('content')
                 	</script>
+
+                </div>
 			</div>
 
 			<div class="form-group">
