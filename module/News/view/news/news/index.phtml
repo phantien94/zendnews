@@ -5,10 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>List News</title>
-    <base href="http://localhost/zendnews/public/">
-    
+    <base href="http://localhost:8080/zendnews/public/">
+    <style>
+    	.my-message ul li{
+    		list-style-type:none;
+
+		}
+    </style>
 </head>
+
 <body>
+	<div class="row">
+        <div class="col-sm-4 col-sm-offset-4 my-message">
+            <?= $this->flashMessenger()->render('success',['alert','alert-success']);?>
+            <?= $this->flashMessenger()->render('warning',['alert','alert-warning']);?>
+        </div>
+    </div>
+
 	<h2>Danh sách bài viết</h2>
 	<a href="<?=$this->url('news',[
 		'controller'=>'news',

@@ -8,7 +8,7 @@ use Zend\Filter;
 use Zend\Validator\NotEmpty;
 use Zend\Form\Element\Select;
 use Zend\Form\Element\Textarea;
-use  Zend\Validator\Digits;
+use Zend\Validator\Digits;
 use Zend\Form\Element\Checkbox;
 
 

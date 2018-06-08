@@ -13,6 +13,7 @@ use News\Form\NewsForm;
 use Zend\Filter\File\Rename;
 use Zend\Paginator\Paginator;
 use Zend\Paginator\Adapter;
+use Zend\Mvc\Plugin\FlashMessenger;
 
 class NewsController extends AbstractActionController
 {
@@ -105,6 +106,8 @@ class NewsController extends AbstractActionController
         $news->exchangeArray($data);
         $this->table->saveNews($news);
 
+        $this->flashMessenger()->addSuccessMessage('Thêm thành công');
+
          return $this->redirect()->toRoute('news',[
             'controller'=>'news',
             'action'=>'index'
@@ -122,7 +125,7 @@ class NewsController extends AbstractActionController
         if(!$news) $flag=false;
 
         if(!$flag){
-
+            $this->flashMessenger()->addWarningMessage('Không tìm thấy bài viết');
             return $this->redirect()->toRoute('news',[
                 'controller'=>'news',
                 'action'    =>'index'
@@ -188,6 +191,8 @@ class NewsController extends AbstractActionController
         $news->exchangeArray($data);
         $this->table->saveNews($news,$idbv);
 
+        $this->flashMessenger()->addSuccessMessage('Cập nhật thành công');
+
          return $this->redirect()->toRoute('news',[
             'controller'=>'news',
             'action'=>'index'
@@ -209,6 +214,7 @@ class NewsController extends AbstractActionController
         if(!$news) $flag=false;
 
         if(!$flag){
+             $this->flashMessenger()->addWarningMessage('Không tìm thấy bài viết');
             return $this->redirect()->toRoute('news',[
                 'controller'=>'news',
                 'action'    =>'index'
@@ -227,6 +233,9 @@ class NewsController extends AbstractActionController
         if($btn=='Yes'){
             $this->table->deleteNews($idbv);
         }
+
+        $this->flashMessenger()->addSuccessMessage('Bài viết đã được xóa');
+
         return $this->redirect()->toRoute('news',[
             'controller'=>'news',
             'action'=>'index'

@@ -33,7 +33,7 @@ class NewsForm extends Form {
 					'vi'=>'VietNam'
 				],		
 				'label_attributes'=>[
-                    'class'=>"col-sm-2"
+                    'class'=>"control-label col-sm-2"
                 ],
 			],
 
@@ -49,7 +49,7 @@ class NewsForm extends Form {
 			'options'=>[
 				'label'=>'Tiêu đề',
 				'label_attributes'=>[
-                    'class'=>"col-sm-2"
+                    'class'=>"control-label col-sm-2"
                 ],
 			],
 
@@ -65,7 +65,7 @@ class NewsForm extends Form {
 			'options'=>[
 				'label'=>'Tóm tắt',
 				'label_attributes'=>[
-                    'class'=>"col-sm-2"
+                    'class'=>"control-label col-sm-2"
                 ],
 			],
 
@@ -82,12 +82,11 @@ class NewsForm extends Form {
 			'options'=>[
 				'label'=>'Chọn hình',
 				'label_attributes'=>[
-                    'class'=>"col-sm-2"
+                    'class'=>"control-label col-sm-2"
                 ],
 			],
 
 			'attributes'=>[
-                'class'=>'form-control',
 				'multiple'=>true
 			],
 		]);
@@ -104,9 +103,8 @@ class NewsForm extends Form {
 
 			'attributes'=>[
 				'class'=>'form-control',
-				'placeholder'=>'Nhập nội dung bài viết',
 				'rows'=>5,
-				 'id'=>'content'
+				'id'=>'content'
 			],
 		]);
 
@@ -116,7 +114,7 @@ class NewsForm extends Form {
 			'options'=>[
 				'label'=>'Thể loại',
 				'label_attributes'=>[
-                    'class'=>"col-sm-2"
+                    'class'=>"control-label col-sm-2"
                 ],
 			],
 
@@ -131,7 +129,7 @@ class NewsForm extends Form {
 			'options'=>[
 				'label'=>'Nổi bật',
 				'label_attributes'=>[
-                    'class'=>"col-sm-2"
+                    'class'=>"control-label col-sm-2"
                 ],
 			],
 
@@ -141,18 +139,7 @@ class NewsForm extends Form {
             ]
 		]);
 
-		if($this->action =='add'){
-			$this->add([
-	                'type'=>'Submit',
-	                'name'=>'btnSubmit',
-	                'attributes'=>[
-	                    'class'=>'btn btn-primary',
-	                    'value'=>'Add'
-	                ]
-	        ]);
-		}
-        else{
-            $this->add([
+        $this->add([
                 'type'=>'Submit',
                 'name'=>'btnSubmit',
                 'attributes'=>[
@@ -160,8 +147,6 @@ class NewsForm extends Form {
                     'value'=>'Update'
                 ]
             ]);
-        }
-
 		$this->filterForm();
 	}
 

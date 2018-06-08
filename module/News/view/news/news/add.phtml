@@ -1,9 +1,11 @@
 ﻿<?php
 $form = $this->form;
 $form->setAttributes([
+	'class'=>'form-horizontal',
 	'action'=>'#',
 	'enctype' => 'multipart/form-data'
 ]);
+
 $tieude = $form->get('TieuDe');
 $lang 	= $form->get('lang');
 $tomtat	= $form->get('TomTat');
@@ -104,9 +106,8 @@ $form->prepare();
             	<div class="col-sm-offset-2 col-sm-10">
                 	<?=$this->formElement($btn);?>
             	</div>
-        	</div
+        	</div>
 
 		<?=$this->form()->closeTag()?>
 	</div>
-</div>
 </div>
