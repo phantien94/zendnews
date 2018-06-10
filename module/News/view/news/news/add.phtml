@@ -6,6 +6,7 @@ $form->setAttributes([
 	'enctype' => 'multipart/form-data'
 ]);
 
+
 $tieude = $form->get('TieuDe');
 $lang 	= $form->get('lang');
 $tomtat	= $form->get('TomTat');
@@ -23,7 +24,7 @@ $form->prepare();
 		<h2 class="text-center">Thêm bài viết mới</h2>
 		<br>
 		<?=$this->form()->openTag($form)?>
-			
+
 			<div class="form-group">
 				<?=$this->formLabel($tieude)?>
 				<div class="col-sm-10">

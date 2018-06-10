@@ -1,0 +1,74 @@
+<?php if ($this->pageCount): ?>
+<ul class="pagination">
+    <?php if (isset($this->previous)): ?>
+    <li class="page-item">
+      <a class="page-link" href="<?= $this->url($this->route, [
+                                'page' => $this->previous,
+                                'action'=>'hotNews',
+                                'controller'=>'news'
+                            ]); ?>" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <?php else:?>
+      <li class="page-item disabled">
+      <span aria-hidden="true">&laquo;</span>
+    </li>
+    <?php endif;?>
+    <?php if (isset($this->first)): ?>
+    <li class="page-item">
+      <a class="page-link" href="<?= $this->url($this->route, [
+                                'page' => $this->first,
+                                'action'=>'hotNews',
+                                'controller'=>'news'
+                            ]); ?>" aria-label="Previous">
+        <span aria-hidden="true">First</span>
+      </a>
+    </li>
+    <?php endif;?>
+    <?php foreach ($this->pagesInRange as $page): ?>
+    <?php if ($page != $this->current): ?>
+    <li class="page-item">
+      <a class="page-link" href="<?= $this->url($this->route, [
+                                    'page' => $page,
+                                    'action'=>'hotNews',
+                                    'controller'=>'news'
+                                ]); ?>"> <?= $page; ?></a>
+    </li>
+    <?php else: ?>
+    <li class="page-item active"><a class="page-link" href="#"><?= $page; ?></a></li>
+    <?php endif;?>
+    <?php endforeach;?>
+
+    <?php if (isset($this->last)): ?>
+    <li class="page-item">
+      <a class="page-link" href="<?= $this->url($this->route, [
+                                'page' => $this->last,
+                                'action'=>'hotNews',
+                                'controller'=>'news'
+                            ]); ?>" aria-label="Next">
+        <span aria-hidden="true">Last</span>
+      </a>
+    </li>
+    <?php endif;?>
+
+    <?php if (isset($this->next)): ?>
+    <li class="page-item">
+      <a class="page-link" href="<?= $this->url($this->route, [
+                                'page' => $this->next,
+                                'action'=>'hotNews',
+                                'controller'=>'news'
+                            ]); ?>" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+
+    <?php else:?>
+      <li class="page-item disabled">
+        <span aria-hidden="true">&raquo;</span>
+      </li>
+    <?php endif;?>
+    
+</ul>
+
+<?php endif;?>

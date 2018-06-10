@@ -10,6 +10,7 @@ use Zend\View\Model\ViewModel;
 use News\Model\NewsTable;
 use News\Model\News;
 use News\Form\NewsForm;
+use News\Form\SearchForm;
 use Zend\Filter\File\Rename;
 use Zend\Paginator\Paginator;
 use Zend\Paginator\Adapter;
@@ -45,6 +46,32 @@ class NewsController extends AbstractActionController
         
     }
 
+    function hotNewsAction()
+    {   
+        $page = $this->params()->fromRoute('page');
+        $result = $this->table->popular();
+
+        $arrNews = [];
+        foreach($result as $n){
+            $arrNews[] = $n; 
+        }
+
+        $paginator = new Paginator(new Adapter\ArrayAdapter($arrNews));
+        $paginator->setCurrentPageNumber($page);
+        $paginator->setItemCountPerPage(5);
+        $paginator->setPageRange(5);
+
+        return new ViewModel(['result'=>$paginator]);
+        
+    }
+
+    function searchAction(){
+        $form = new SearchForm();
+          $request = $this->getRequest();
+         if($request->isGet()){
+            return new ViewModel(['form'=>$form]);
+        }
+    }
     function addAction(){
         $form = new NewsForm();
         $types = $this->table->getAllType();

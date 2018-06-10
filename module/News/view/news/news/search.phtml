@@ -1,0 +1,40 @@
+<?php
+$form = $this->form;
+$form->setAttributes([
+	'class'=>'form-horizontal',
+	'action'=>'#',
+	'enctype' => 'multipart/form-data'
+]);
+
+$tukhoa = $form->get('TuKhoa');
+$btn	= $form->get('btnSubmit');
+
+$form->prepare();
+?>
+<script src="../ckeditor/ckeditor.js"></script>
+<div class="row">
+	<div class="col-sm-12">
+		<h2 class="text-center">Thêm bài viết mới</h2>
+		<br>
+		<?=$this->form()->openTag($form)?>
+
+			<div class="form-group">
+				<?=$this->formLabel($tukhoa)?>
+				<div class="col-sm-10">
+					<?php
+						echo $this->formElement($tukhoa);
+						echo $this->formElementErrors($tukhoa);
+					?>	
+				</div>
+			</div>
+
+
+			<div class="form-group">
+            	<div class="col-sm-offset-2 col-sm-10">
+                	<?=$this->formElement($btn);?>
+            	</div>
+        	</div>
+
+		<?=$this->form()->closeTag()?>
+	</div>
+</div>
