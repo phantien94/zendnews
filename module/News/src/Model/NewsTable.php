@@ -48,6 +48,8 @@ class NewsTable {
         return $results = $statement->execute();
     }
 
+    
+
     public function saveNews(News $data,$idbv=0){
         // print_r($data);
         // die;
@@ -123,6 +125,24 @@ class NewsTable {
         $statement = $sql->prepareStatementForSqlObject($select);
         return $results = $statement->execute();
 
+    }
+
+    public function typeList(){
+        $adapter = $this->tableGateway->getAdapter();
+
+        $sql = new Sql($adapter);
+        $select = $sql->select(['n'=>'tintuc']);
+        $select->join(
+            ['p'=>'phanloaibai'],
+            'p.idloai = n.idLoai',
+            [
+                'loai'=>'TenLoai'
+            ]
+        );
+        $select->where(['n.AnHien = 1','n.idloai=1']);
+        $select->order('n.idbv DESC');
+        $statement = $sql->prepareStatementForSqlObject($select);
+        return $results = $statement->execute();
     }
 
 }

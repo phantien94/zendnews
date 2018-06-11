@@ -31,6 +31,9 @@ class NewsController extends AbstractActionController
         $page = $this->params()->fromRoute('page');
         $result = $this->table->fetchAll();
 
+
+        $types = $this->table->getAllType();
+
         $arrNews = [];
         foreach($result as $n){
             $arrNews[] = $n; 
@@ -41,9 +44,56 @@ class NewsController extends AbstractActionController
         $paginator->setItemCountPerPage(5);
         $paginator->setPageRange(5);
 
-        return new ViewModel(['result'=>$paginator]);
+        return new ViewModel(['result'=>$paginator,'types'=>$types]);
         
     }
+
+    // function typeListAction(){
+    //     $page = $this->params()->fromRoute('page');
+    //     $result = $this->table->typeList();
+
+    //     // print_r($result);
+    //     // return false;
+
+    //     $arrNews = [];
+    //     foreach($result as $n){
+    //         $arrNews[] = $n; 
+    //     }
+
+    //     $paginator = new Paginator(new Adapter\ArrayAdapter($arrNews));
+    //     $paginator->setCurrentPageNumber($page);
+    //     $paginator->setItemCountPerPage(5);
+    //     $paginator->setPageRange(5);
+
+
+    //     return new ViewModel(['result'=>$paginator,'types'=>$types]);
+        
+    // }
+
+    // function getTypeAction(){
+    //     $idloai = (int)$this->params()->fromRoute('page');
+        
+    //     $flag = true;
+
+    //     if($idbv===0) $flag=false;
+
+    //     $types = $this->table->typeList($idloai);
+
+    //     if(!$news) $flag=false;
+
+    //     if(!$flag){
+    //         return $this->redirect()->toRoute('news',[
+    //             'controller'=>'news',
+    //             'action'    =>'index'
+    //         ]);
+    //     }
+
+    //     $request = $this->getRequest();
+
+    //     if(!$request->isPost()){
+    //         return new ViewModel(['idloai'=>$idloai,'types'=>$types]);
+    //     }
+    // }
 
     function addAction(){
         $form = new NewsForm();
@@ -245,7 +295,7 @@ class NewsController extends AbstractActionController
         ]);
     
     
-}
+    }
     function backupAction(){
         // $this->table->deleteNews($idbv);
         // return false;
