@@ -6,6 +6,7 @@ $form->setAttributes([
 	'enctype' => 'multipart/form-data'
 ]);
 
+
 $tieude = $form->get('TieuDe');
 $lang 	= $form->get('lang');
 $tomtat	= $form->get('TomTat');
@@ -17,16 +18,29 @@ $btn	= $form->get('btnSubmit');
 
 $form->prepare();
 ?>
+
+<style>
+	.filter ul li{
+		list-style-type: none;
+		color: red;
+		font-weight: bold;
+	}
+	h2 {
+		color: #154981;
+		font-weight: bold;
+	}
+</style>
+
 <script src="../ckeditor/ckeditor.js"></script>
 <div class="row">
 	<div class="col-sm-12">
 		<h2 class="text-center">Thêm bài viết mới</h2>
 		<br>
 		<?=$this->form()->openTag($form)?>
-			
+
 			<div class="form-group">
 				<?=$this->formLabel($tieude)?>
-				<div class="col-sm-10">
+				<div class="col-sm-10 filter">
 					<?php
 						echo $this->formElement($tieude);
 						echo $this->formElementErrors($tieude);
@@ -46,7 +60,7 @@ $form->prepare();
 			
 			<div class="form-group">
 				<?=$this->formLabel($tomtat)?>
-				<div class="col-sm-10">
+				<div class="col-sm-10 filter">
 					<?php
 						echo $this->formElement($tomtat);
 						echo $this->formElementErrors($tomtat);
@@ -56,7 +70,7 @@ $form->prepare();
 
 			<div class="form-group">
 				<?=$this->formLabel($urlhinh)?>
-				<div class="col-sm-10">
+				<div class="col-sm-10 filter">
 					<?php
 						echo $this->formElement($urlhinh);
 						echo $this->formElementErrors($urlhinh);
@@ -67,7 +81,7 @@ $form->prepare();
 
 			<div class="form-group">
 				<?=$this->formLabel($content)?>
-				<div class="col-sm-10">
+				<div class="col-sm-10 filter">
 					<?php
 						echo $this->formElement($content);
 						echo $this->formElementErrors($content);

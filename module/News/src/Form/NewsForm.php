@@ -51,11 +51,13 @@ class NewsForm extends Form {
 				'label_attributes'=>[
                     'class'=>"control-label col-sm-2"
                 ],
+                
 			],
 
 			'attributes'=>[
 				'class'=>'form-control',
-				'placeholder'=>'Nhập tiêu đề bài viết'
+				'placeholder'=>'Nhập tiêu đề bài viết',
+
 			],
 		]);
 

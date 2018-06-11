@@ -10,10 +10,11 @@ use Zend\View\Model\ViewModel;
 use News\Model\NewsTable;
 use News\Model\News;
 use News\Form\NewsForm;
+use News\Form\SearchForm;
 use Zend\Filter\File\Rename;
 use Zend\Paginator\Paginator;
 use Zend\Paginator\Adapter;
-use Zend\Mvc\Plugin\FlashMessenger;
+use Zend\Mvc\Controller\Plugin\FlashMessenger;
 
 class NewsController extends AbstractActionController
 {
@@ -48,52 +49,32 @@ class NewsController extends AbstractActionController
         
     }
 
-    // function typeListAction(){
-    //     $page = $this->params()->fromRoute('page');
-    //     $result = $this->table->typeList();
+    function hotNewsAction()
+    {   
+        $page = $this->params()->fromRoute('page');
+        $result = $this->table->popular();
 
-    //     // print_r($result);
-    //     // return false;
+        $arrNews = [];
+        foreach($result as $n){
+            $arrNews[] = $n; 
+        }
 
-    //     $arrNews = [];
-    //     foreach($result as $n){
-    //         $arrNews[] = $n; 
-    //     }
+        $paginator = new Paginator(new Adapter\ArrayAdapter($arrNews));
+        $paginator->setCurrentPageNumber($page);
+        $paginator->setItemCountPerPage(5);
+        $paginator->setPageRange(5);
 
-    //     $paginator = new Paginator(new Adapter\ArrayAdapter($arrNews));
-    //     $paginator->setCurrentPageNumber($page);
-    //     $paginator->setItemCountPerPage(5);
-    //     $paginator->setPageRange(5);
-
-
-    //     return new ViewModel(['result'=>$paginator,'types'=>$types]);
+        return new ViewModel(['result'=>$paginator]);
         
-    // }
+    }
 
-    // function getTypeAction(){
-    //     $idloai = (int)$this->params()->fromRoute('page');
-        
-    //     $flag = true;
-
-    //     if($idbv===0) $flag=false;
-
-    //     $types = $this->table->typeList($idloai);
-
-    //     if(!$news) $flag=false;
-
-    //     if(!$flag){
-    //         return $this->redirect()->toRoute('news',[
-    //             'controller'=>'news',
-    //             'action'    =>'index'
-    //         ]);
-    //     }
-
-    //     $request = $this->getRequest();
-
-    //     if(!$request->isPost()){
-    //         return new ViewModel(['idloai'=>$idloai,'types'=>$types]);
-    //     }
-    // }
+    function searchAction(){
+        $form = new SearchForm();
+          $request = $this->getRequest();
+         if($request->isGet()){
+            return new ViewModel(['form'=>$form]);
+        }
+    }
 
     function addAction(){
         $form = new NewsForm();
@@ -244,7 +225,7 @@ class NewsController extends AbstractActionController
         $news->exchangeArray($data);
         $this->table->saveNews($news,$idbv);
 
-       // $this->flashMessenger()->addSuccessMessage('Cập nhật thành công');
+       $this->flashMessenger()->addSuccessMessage('Cập nhật thành công');
 
          return $this->redirect()->toRoute('news',[
             'controller'=>'news',
@@ -356,9 +337,4 @@ class NewsController extends AbstractActionController
         
     }
 
-    function testjsAction(){
-        $result = new ViewModel();
-        $result->setTemplate('news/testjs.phtml');
-        return $result;
-    }
 }

@@ -1,27 +1,20 @@
 <?php
 namespace News\Model;
-
 use RuntimeException;
 use Zend\Db\TableGateway\TableGatewayInterface;
 use Zend\Db\Sql\Sql;
-
 class NewsTable {
-
     private $tableGateway;
-
     public function __construct(TableGatewayInterface $tableGateway)
     {
         $this->tableGateway = $tableGateway;
     }
-
     function testConnect(){//get table name
         return $this->tabelGateway->getTable();
     }
-
     public function fetchAll()
     {
         $adapter = $this->tableGateway->getAdapter();
-
         $sql = new Sql($adapter);
         $select = $sql->select(['n'=>'tintuc']);
         $select->join(
@@ -35,21 +28,37 @@ class NewsTable {
         $select->order('n.idbv DESC');
         $statement = $sql->prepareStatementForSqlObject($select);
         return $results = $statement->execute();
-
     }
-
-    public function getAllType(){
+    public function popular()
+    {
         $adapter = $this->tableGateway->getAdapter();
-
         $sql = new Sql($adapter);
-        $select = $sql->select('phanloaibai')->where('AnHien=1');
-
+        $select = $sql->select(['n'=>'tintuc']);
+        $select->join(
+            ['p'=>'phanloaibai'],
+            'p.idloai = n.idLoai',
+            [
+                'loai'=>'TenLoai'
+            ]
+        );
+        $select->where(['n.AnHien = 1','n.NoiBat = 1']);
+        $select->order('n.idbv DESC');
         $statement = $sql->prepareStatementForSqlObject($select);
         return $results = $statement->execute();
     }
-
-    
-
+    public function findNews($tieude,$tomtat,$content){
+        $news = $this->tableGateway->select(['idLoai'=>$idloai]);
+        $news = $news->current();
+        if(!$news){ return false; }
+        return $news;
+    }
+    public function getAllType(){
+        $adapter = $this->tableGateway->getAdapter();
+        $sql = new Sql($adapter);
+        $select = $sql->select('phanloaibai')->where('AnHien=1');
+        $statement = $sql->prepareStatementForSqlObject($select);
+        return $results = $statement->execute();
+    }
     public function saveNews(News $data,$idbv=0){
         // print_r($data);
         // die;
@@ -64,10 +73,8 @@ class NewsTable {
             'idLoai'=>$data->idLoai,
             'NoiBat'=>$data->NoiBat,
             'AnHien'=>$data->AnHien,
-
         ];
         //return $this->tableGateway->insert($news);
-
         if($idbv==0){
             return $this->tableGateway->insert($news);
         }
@@ -76,41 +83,33 @@ class NewsTable {
             "idbv=$idbv"
         );
     }
-
     public function findId($idbv){
         $news = $this->tableGateway->select(['idbv'=>$idbv]);
         $news = $news->current();
         if(!$news){ return false; }
         return $news;
     }
-
     public function deleteNews($idbv){
         $news = [
             'AnHien'=>'0'
         ];
-
         return $this->tableGateway->update(
             $news,
             "idbv=$idbv"
         );
-
     }
-
     public function backupNews($idbv){
         $news = [
             'AnHien'=>'1'
         ];
-
         return $this->tableGateway->update(
             $news,
             "idbv=$idbv"
         );
     }
-
     public function deletedList()
     {
         $adapter = $this->tableGateway->getAdapter();
-
         $sql = new Sql($adapter);
         $select = $sql->select(['n'=>'tintuc']);
         $select->join(
@@ -124,25 +123,5 @@ class NewsTable {
         $select->order('n.idbv DESC');
         $statement = $sql->prepareStatementForSqlObject($select);
         return $results = $statement->execute();
-
     }
-
-    public function typeList(){
-        $adapter = $this->tableGateway->getAdapter();
-
-        $sql = new Sql($adapter);
-        $select = $sql->select(['n'=>'tintuc']);
-        $select->join(
-            ['p'=>'phanloaibai'],
-            'p.idloai = n.idLoai',
-            [
-                'loai'=>'TenLoai'
-            ]
-        );
-        $select->where(['n.AnHien = 1','n.idloai=1']);
-        $select->order('n.idbv DESC');
-        $statement = $sql->prepareStatementForSqlObject($select);
-        return $results = $statement->execute();
-    }
-
 }
