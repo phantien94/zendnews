@@ -139,7 +139,7 @@ class NewsController extends AbstractActionController
         $this->table->saveNews($news);
 
         
-        //$this->addMessage($message, self::NAMESPACE_SUCCESS);
+        
         //$this->flashMessenger()->addSuccessMessage('Thêm thành công');
 
         return $this->redirect()->toRoute('news',[
@@ -225,7 +225,7 @@ class NewsController extends AbstractActionController
         $news->exchangeArray($data);
         $this->table->saveNews($news,$idbv);
 
-       $this->flashMessenger()->addSuccessMessage('Cập nhật thành công');
+        echo "Updated";
 
          return $this->redirect()->toRoute('news',[
             'controller'=>'news',

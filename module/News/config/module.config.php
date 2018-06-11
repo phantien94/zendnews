@@ -17,7 +17,7 @@ return [
             'news' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '[/:controller][/:action][/:page][/:key]',
+                    'route'    => '[/:controller][/:action][/:page]',
                     'defaults' => [
                         // 'controller'=>Controller\NewsController::class,
                         // 'action'    =>'add',

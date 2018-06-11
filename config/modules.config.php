@@ -16,9 +16,9 @@ return [
     'Zend\Session',
     'Zend\Mvc\Plugin\Prg',
     'Zend\Mvc\Plugin\Identity',
-    'Zend\Mvc\Plugin\FlashMessenger',
     'Zend\Mvc\Plugin\FilePrg',
     'Zend\Mvc\I18n',
+    'Zend\Mvc\Plugin\FlashMessenger',
     'Zend\Form',
     'Zend\Db',
     'Zend\Cache',
@@ -26,6 +26,5 @@ return [
     'Zend\Validator',
     'ZendDeveloperTools',
     'Application',
-    'Products',
     'News'
 ];
